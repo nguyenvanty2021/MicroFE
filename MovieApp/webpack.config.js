@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const { ModuleFederationPlugin } = require("webpack").container;
-
+const packageJson = require("./package.json");
 module.exports = {
   mode: "development",
   entry: path.resolve(__dirname, "src", "index.js"),
@@ -71,9 +71,9 @@ module.exports = {
       remotes: {
         homepage: "home@http://localhost:3000/remoteEntry.js",
         detailspage: "details@http://localhost:3001/remoteEntry.js",
-        seatselection: "seatselection@http://localhost:3003/remoteEntry.js"
+        seatselection: "seatselection@http://localhost:3003/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: packageJson.dependencies,
     }),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({

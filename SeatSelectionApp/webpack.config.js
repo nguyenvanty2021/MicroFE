@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const { ModuleFederationPlugin } = require("webpack").container;
-
+const packageJson = require("./package.json");
 module.exports = {
   mode: "development",
   entry: path.resolve(__dirname, "src", "index.js"),
@@ -25,7 +25,7 @@ module.exports = {
         "./SeatSelection":
           "./src/components/SeatSelectionContent/SeatSelectionContent.jsx",
       },
-      shared: ["react","react-dom"]
+      shared: packageJson.dependencies,
     }),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
